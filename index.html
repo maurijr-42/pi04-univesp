@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projeto Integrador IV — Artigo Interativo</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;600&display=swap" />
+  <link rel="stylesheet" href="style.css" /> 
+</head>
+<body>
+  <header id="mainHeader" class="site-header" role="banner">
+    <div class="container text-center position-relative">
+      <button id="btnVoltar" class="back-btn" aria-label="Voltar" hidden>
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+      </button>
+      
+      <h1>Projeto Integrador IV</h1>
+      <p class="subtitle">Boas práticas de dados e ML em formato didático</p>
+      
+      <button id="themeToggle" class="theme-toggle" aria-label="Mudar tema">
+        <span class="material-symbols-outlined icon-light">light_mode</span>
+        <span class="material-symbols-outlined icon-dark">dark_mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="app" class="container" role="main">
+    
+    <section id="moment1" class="moment is-active" aria-label="Momento 1">
+      <article class="article fade-slide" id="artigo">
+        
+        <section id="objetivo">
+          <h2>Objetivo: Além da "Caixa Preta"</h2>
+          <p>
+            O objetivo central deste projeto é desenvolver uma <strong>interface interativa</strong> que sirva como um "laboratório vivo" para o aprendizado de Machine Learning. Mais do que apenas apresentar teoria, queremos desmistificar a "caixa preta" e demonstrar de forma didática e aplicada as <strong>boas práticas de manipulação e análise de dados</strong> que sustentam qualquer modelo de sucesso.
+          </p>
+          <p>
+            Vivemos uma era onde criar um modelo de ML pode ser feito com poucas linhas de código, usando bibliotecas como Keras ou Scikit-learn. No entanto, criar um modelo que seja <strong>robusto, justo, interpretável e confiável</strong> exige um rigor que vai muito além do `model.fit()`. Esta interface foi projetada para preencher essa lacuna, combinando <em>exemplos concretos</em> e atividades <em>hands-on</em>.
+          </p>
+          <p>
+            Ao utilizar um <strong>ambiente realista</strong> (o clássico dataset do Titanic), o usuário pode conectar diretamente a teoria com a prática. A proposta é permitir que se "sinta" o impacto de cada decisão: Como a escolha de uma função de ativação (`ReLU`, `Tanh`) afeta a convergência? Qual o impacto de adicionar mais camadas ou neurônios? O que acontece se a taxa de `dropout` for muito alta? Ao consolidar a compreensão conceitual através da experimentação direta, esperamos solidificar o conhecimento de forma muito mais eficaz do que a simples leitura. Queremos transformar "copiadores de código" em profissionais que pensam criticamente sobre o ciclo de vida completo do ML.
+          </p>
+        </section>
+
+        <section id="problema">
+          <h2>O Problema: "Garbage In, Garbage Out"</h2>
+          <p>
+            O princípio fundamental da ciência de dados é cruelmente simples: <em>"Garbage In, Garbage Out"</em> (GIGO), ou "Lixo Entra, Lixo Sai". Com a crescente facilidade de implementação de modelos de Machine Learning (ML), muitas vezes impulsionada por bibliotecas de alto nível e ferramentas de AutoML, etapas essenciais ao bom desenvolvimento têm sido perigosamente negligenciadas.
+          </p>
+          <p>
+            Um modelo de ML é, em essência, um motor de reconhecimento de padrões. Ele não "entende" o mundo; ele apenas aprende a mapear matematicamente as entradas (features) para as saídas (labels) que viu durante o treino. Se os dados de entrada estiverem sujos, enviesados ou mal preparados, o modelo aprenderá padrões sujos, enviesados e inúteis.
+          </p>
+          <p>
+            Antes mesmo de se considerar treinar um modelo, é indispensável realizar:
+          </p>
+          <ul>
+            <li>
+              <strong>Análise Exploratória de Dados (EDA):</strong> Entender a fundo os dados. Qual a distribuição de `Age`? Existem valores ausentes (NaNs)? Com o que `Fare` se correlaciona? No Titanic, por exemplo, tratar os valores ausentes de `Age` (preenchendo com a mediana) e `Embarked` (preenchendo com a moda) são passos cruciais que fizemos no `modelo.py`.
+            </li>
+            <li>
+              <strong>Engenharia de Features:</strong> Muitas vezes, os dados brutos não são a forma ideal. Por exemplo, poderíamos ter combinado `SibSp` (irmãos/cônjuges) e `Parch` (pais/filhos) para criar uma nova feature `FamilySize`. Ou, ainda mais poderoso, poderíamos extrair o "Título" (Mr., Mrs., Miss., Master.) do nome do passageiro, o que é um forte indicador de sobrevivência.
+            </li>
+            <li>
+              <strong>Pré-processamento:</strong> É aqui que o GIGO é evitado. Um modelo de rede neural, que usa gradiente descendente, é extremamente sensível à *escala* das features. Se `Age` varia de 0 a 80 e `Fare` de 0 a 512, o modelo dará um peso desproporcional à tarifa. Por isso, usamos `StandardScaler` (para normalizar as features numéricas) e `OneHotEncoder` (para transformar features categóricas como `Sex` e `Embarked` em vetores numéricos que o modelo entenda sem criar uma falsa relação ordinal).
+            </li>
+          </ul>
+          <p>
+            A falta desse rigor resulta em modelos que podem apresentar uma ótima acurácia no ambiente de laboratório, mas falham miseravelmente na produção. Eles podem aprender padrões espúrios, perpetuar vieses sociais ou simplesmente não ter capacidade de generalização para dados novos. Este projeto ataca esse problema de frente, expondo o "antes" e o "durante" do treinamento.
+          </p>
+        </section>
+
+        <section id="publico">
+          <h2>Público-alvo: De Consumidor a Criador Crítico</h2>
+          <p>
+            Esta proposta se volta primariamente à <strong>comunidade de cientistas de dados em início de carreira</strong> e a <strong>indivíduos interessados em ingressar na área de ML</strong>. Estes são os profissionais que estão atualmente formando seus hábitos; é crucial que desenvolvam desde cedo a mentalidade de que a qualidade dos dados e o rigor do processo são mais importantes que a complexidade do modelo em si.
+          </p>
+          <p>
+            Além deles, outros públicos se beneficiam diretamente:
+          </p>
+          <ul>
+            <li>
+              <strong>Desenvolvedores e Engenheiros de Software:</strong> Os "consumidores" de modelos de ML. Ao integrar um modelo a uma aplicação, eles precisam entender o "contrato" da API. Por que o modelo espera um JSON com `Age` normalizado e `Sex` como `[1, 0]`? Entender o pré-processamento evita bugs catastróficos na integração.
+            </li>
+            <li>
+              <strong>Gerentes de Produto e Analistas de Negócios:</strong> Os "stakeholders". Eles precisam entender por que um projeto de ML não é "mágica" e por que 80% do tempo é gasto em dados, e não no modelo. Isso os ajuda a definir KPIs realistas, questionar possíveis vieses ("Nosso modelo foi treinado em dados de qual demografia?") e entender o risco de "data drift" (quando os dados do mundo real mudam).
+            </li>
+          </ul>
+          <p>
+            A recente popularização de ferramentas de <strong>IA Generativa</strong> (como ChatGPT, CoPilot) torna essa formação ainda mais urgente. Essas ferramentas podem escrever o *código* para treinar um modelo em segundos, mas elas não podem *fazer a análise crítica* dos dados, *validar a metodologia* de pré-processamento ou *interpretar os resultados* de forma justa. Esta interface ajuda a construir esse músculo de pensamento crítico que nenhuma IA pode substituir.
+          </p>
+        </section>
+
+        <section id="exemplos">
+          <h2>Armadilhas Clássicas em Projetos de ML</h2>
+          <p>Expandindo os erros comuns, vemos armadilhas que podem invalidar completamente um projeto. Esta interface permite simular algumas delas (como overfitting):</p>
+          <ul class="examples">
+            <li>
+              <strong>Dados Desbalanceados: O Falso Positivo da Acurácia</strong>
+              <br><em>O que é:</em> O modelo é treinado em dados onde uma classe é massivamente majoritária (ex: 99% transações normais, 1% fraude).
+              <br><em>A Armadilha:</em> O modelo aprende a "acertar" sempre a classe majoritária. Um modelo que sempre prevê "não-fraude" atinge 99% de acurácia, mas é 100% inútil.
+              <br><em>A Lição:</em> Acurácia é uma métrica ruim para dados desbalanceados. Deve-se usar Precisão, Recall ou F1-Score.
+            </li>
+            <li>
+              <strong>Vazamento de Informação (Data Leakage): O Oráculo Acidental</strong>
+              <br><em>O que é:</em> Variáveis do "futuro" ou que são um sinônimo do rótulo entram no treino.
+              <br><em>A Armadilha:</em> O modelo parece perfeito no treino (ex: 99.9% de acurácia) porque ele "já sabe" a resposta. Ex: prever se um cliente pagará um empréstimo usando a variável `data_do_ultimo_pagamento_efetuado`.
+              <br><em>A Lição:</em> Exige um conhecimento profundo do domínio do problema para garantir que as features de treino estariam *realmente* disponíveis no momento da previsão.
+            </li>
+            <li>
+              <strong>Pré-processamento Inconsistente: A Falha na Produção</strong>
+              <br><em>O que é:</em> A forma como os dados são pré-processados no treino é diferente da forma como são processados na inferência (produção).
+              <br><em>A Armadilha:</em> O modelo foi treinado com `StandardScaler` (media 0, desvio 1), mas recebe dados brutos (ex: `Age = 30`). O resultado da previsão será completamente sem sentido.
+              <br><em>A Lição:</em> O pré-processador (o nosso `scaler_titanic.pkl`) é parte integrante do modelo. Ele deve ser salvo junto com o modelo e reutilizado para transformar *exatamente* da mesma forma qualquer novo dado de entrada.
+            </li>
+            <li>
+              <strong>Sobreajuste (Overfitting): O Aluno "Decorador"</strong>
+              <br><em>O que é:</em> O modelo se torna tão complexo (muitas camadas, muitos neurônios, muitas épocas) que ele "decora" os dados de treino, incluindo o ruído.
+              <br><em>A Armadilha:</em> O modelo tem uma acurácia de treino altíssima (95%), mas uma acurácia de validação/teste baixíssima (75%), pois não consegue generalizar para dados novos.
+              <br><em>A Lição:</em> É exatamente o que você pode testar! Tente treinar com 5 camadas, 128 neurônios e 0.0 de `dropout_rate`. Veja a acurácia de validação despencar. O *Dropout* é uma técnica de regularização essencial para combater isso, "desligando" aleatoriamente neurônios durante o treino para forçar o modelo a ser mais robusto.
+            </li>
+          </ul>
+        </section>
+
+        <div class="cta">
+          <button id="btnPratica" class="btn-primary">vamos à prática</button>
+        </div>
+      </article>
+    </section>
+    
+    <section id="moment2" class="moment" aria-label="Momento 2" inert aria-hidden="true">
+      
+      <section id="pratica" class="pratica fade-slide">
+        
+        <div class="grid-m2">
+
+          <div class="side-controls" id="controls">
+            <form id="trainForm">
+              
+              <h3>Parâmetros do Modelo</h3>
+              
+              <label class="slider">
+                <span>Função de Ativação</span>
+                <select id="param_activation" class="form-select">
+                  <option value="relu" selected>ReLU</option>
+                  <option value="tanh">Tanh</option>
+                  <option value="sigmoid">Sigmoid</option>
+                </select>
+              </label>
+              
+              <label class="slider">
+                <span>Otimizador</span>
+                <select id="param_optimiser" class="form-select">
+                  <option value="adam" selected>Adam</option>
+                  <option value="sgd">SGD</option>
+                  <option value="rmsprop">RMSprop</option>
+                </select>
+              </label>
+
+              <label class="slider">
+                <span>Função de Perda</span>
+                <select id="param_loss" class="form-select">
+                  <option value="binary_crossentropy" selected>Binary Cross-entropy</option>
+                </select>
+              </label>
+
+              <label class="slider">
+                <span>Tamanho do Teste (% do total)</span>
+                <input id="param_test_size" type="number" value="0.2" min="0.1" max="0.5" step="0.05" />
+              </label>
+
+              <label class="slider">
+                <span>Épocas (Epochs)</span>
+                <input id="param_epochs" type="number" value="100" min="10" step="10" />
+              </label>
+              
+              <label class="slider">
+                <span>Tamanho do Lote (Batch Size)</span>
+                <input id="param_batch_size" type="number" value="32" min="8" step="4" />
+              </label>
+
+              <label class="slider">
+                <span>Camadas Ocultas (Hidden Layers)</span>
+                <input id="param_num_hidden_layers" type="number" value="1" min="1" max="5" step="1" />
+              </label>
+              
+              <label class="slider">
+                <span>Neurônios por Camada</span>
+                <input id="param_neurons_per_layer" type="number" value="32" min="8" step="8" />
+              </label>
+
+              <label class="slider">
+                <span>Taxa de Dropout</span>
+                <input id="param_dropout_rate" type="number" value="0.0" min="0.0" max="0.5" step="0.1" />
+              </label>
+
+              <div class="cta" style="margin-top: 16px;">
+                 <button type="submit" id="btnTrainModel" class="btn-primary">Treinar Modelo</button>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="plot-wrap" id="resultsArea">
+            <h3>Resultados do Treinamento</h3>
+            <div id="trainResults" class="plot-frame">
+              <p style="color: var(--muted);">Aguardando o início do treinamento...</p>
+            </div>
+          </div>
+
+        </div>
+        
+        <hr class="separator">
+
+        <div class="grid-m2" id="predictionArea">
+          
+          <div class="side-controls" id="predict-controls">
+            <form id="predictForm">
+              
+              <h3>Faça sua Própria Previsão</h3>
+              <p class="form-description">
+                Insira os dados do passageiro para prever a sobrevivência.
+              </p>
+
+              <label class="slider">
+                <span>Classe (Pclass)</span>
+                <select id="pred_pclass" class="form-select" required>
+                  <option value="1">1ª Classe</option>
+                  <option value="2">2ª Classe</option>
+                  <option value="3" selected>3ª Classe</option>
+                </select>
+              </label>
+
+              <label class="slider">
+                <span>Sexo (Sex)</span>
+                <select id="pred_sex" class="form-select" required>
+                  <option value="male">Masculino</option>
+                  <option value="female">Feminino</option>
+                </select>
+              </label>
+
+              <label class="slider">
+                <span>Idade (Age)</span>
+                <input id="pred_age" type="number" value="30" min="0" step="1" required />
+              </label>
+
+              <label class="slider">
+                <span>Irmãos/Cônjuges (SibSp)</span>
+                <input id="pred_sibsp" type="number" value="0" min="0" step="1" required />
+              </label>
+
+              <label class="slider">
+                <span>Pais/Filhos (Parch)</span>
+                <input id="pred_parch" type="number" value="0" min="0" step="1" required />
+              </label>
+              
+              <label class="slider">
+                <span>Tarifa (Fare)</span>
+                <input id="pred_fare" type="number" value="15" min="0" step="0.1" required />
+              </label>
+
+              <label class="slider">
+                <span>Porto de Embarque (Embarked)</span>
+                <select id="pred_embarked" class="form-select" required>
+                  <option value="S" selected>Southampton (S)</option>
+                  <option value="C">Cherbourg (C)</option>
+                  <option value="Q">Queenstown (Q)</option>
+                </select>
+              </label>
+
+              <div class="cta" style="margin-top: 16px;">
+                 <button type="submit" id="btnPredict" class="btn-primary">Prever Sobrevivência</button>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="plot-wrap" id="predictionResultsArea">
+            <h3>Resultado da Previsão</h3>
+            <div id="predictResults" class="plot-frame">
+              <p style="color: var(--muted);">Aguardando dados para previsão...</p>
+            </div>
+          </div>
+
+        </div>
+        </section>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>© Projeto Integrador IV — Interface Didática para Dados & ML</p>
+    </div>
+  </footer>
+  
+  <script src="app.js"></script>
+</body>
+</html>
